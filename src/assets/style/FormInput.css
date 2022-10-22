@@ -1,0 +1,20 @@
+.formInput {
+    background: #fff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1rem;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    
+}
+
+.formInput input {
+    width: 70%;
+    border: none;   
+}
+
+.formInput input:focus{
+    outline: none;
+}
