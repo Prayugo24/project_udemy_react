@@ -6,8 +6,8 @@ class FormInput extends Component{
     render(){
         return (
             <form className="formInput">
-                <input type="text" placeholder="Add Text"/>
-                <Button/>
+                <input type="text" placeholder="Add Text" />
+                <Button text="Add" variant="btn btn-primary"/>
             </form>
         )
     }

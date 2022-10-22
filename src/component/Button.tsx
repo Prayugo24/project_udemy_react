@@ -1,8 +1,15 @@
 import React from "react";
+import { text } from "stream/consumers";
+import '../assets/style/Button.css';
 
-const Button = () =>{
+interface Props {
+    text:string;
+    variant?: string;
+}
+
+const Button: React.FC<Props> = ({text, variant}) =>{
     return(
-        <button>Click</button>
+        <button className={variant}>{text} Click</button>
     )
 }
 
