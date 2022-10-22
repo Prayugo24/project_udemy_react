@@ -3,6 +3,7 @@ import FormInput from "./FormInput";
 import TodoItem from "./TodoItem";
 // import Button from "./Button"; typescript tidak bisa mengmport svg
 import '../assets/style/App.css';
+import '../assets/style/index.css';
 const logo: string = require("../assets/images/logo.svg").default;
 
 
@@ -13,9 +14,10 @@ class App extends Component{
     }
     render(){
         return(
-            <div className="App">
+            <div className="app">
                 <div className="logo">
                     <img src={logo} alt="logo"></img>
+                    <h3>{this.state.name}</h3>
                 </div>
                 <div className="list">
                     <TodoItem/>
