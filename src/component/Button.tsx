@@ -4,11 +4,12 @@ import '../assets/style/Button.css';
 interface Props {
     text:string;
     variant?: string;
+    action?:() => void
 }
 
-const Button: React.FC<Props> = ({text, variant}) =>{
+const Button: React.FC<Props> = ({text, variant, action}) =>{
     return(
-        <button className={variant}>{text} Click</button>
+        <button className={variant} onClick={action}>{text} Click</button>
     )
 }
 

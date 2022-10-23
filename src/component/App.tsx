@@ -41,7 +41,13 @@ class App extends Component<props, state>{
         }
             
     }
-  
+    
+    deleteTask = (id?:number) =>  {
+        console.log("delete "+id)
+        this.setState({
+            todos: this.state.todos.filter(item => item.id != id)
+        })
+    }
     
     render(){
         const { todos } = this.state
@@ -54,8 +60,8 @@ class App extends Component<props, state>{
                 <div className="list">
                     
                 {
-                    Object.keys(todos).map((index) => (
-                        <TodoItem key={todos[Number(index)].id} todos={todos[Number(index)].title} />
+                    Object.keys(todos).map((index,i) => (
+                        <TodoItem key={todos[Number(i)].id} idData={todos[Number(i)].id} todos={todos[Number(index)].title} del={() => this.deleteTask(todos[Number(index)].id)}/>
                     ))
                 }
                 </div>
