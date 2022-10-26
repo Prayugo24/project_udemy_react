@@ -13,7 +13,7 @@ interface state {
 
 type Data = {
     id: number;
-    title: string;
+    title?: string;
 }
 
 interface props {
@@ -48,6 +48,17 @@ class App extends Component<props, state>{
             todos: this.state.todos.filter(item => item.id != id)
         })
     }
+    addTask = (text?:string) =>{
+        console.log("add "+text)
+        const id = this.state.todos.length
+        const newData: Data = {
+            id: id + 1,
+            title: text
+        }
+        this.setState({
+            todos: [...this.state.todos,newData]
+        })
+    }
     
     render(){
         const { todos } = this.state
@@ -67,7 +78,7 @@ class App extends Component<props, state>{
                 </div>
                 
                 <div className="input-form">
-                    <FormInput/>
+                    <FormInput add={this.addTask}/>
                 </div>
             </div>
         )
