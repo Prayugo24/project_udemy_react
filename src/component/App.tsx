@@ -11,7 +11,9 @@ const logo: string = require("../assets/images/logo.svg").default;
 interface statesApp {
     todos:Data[],
     isEdit:Boolean
+    editData:Data
 }
+
 
 type Data = {
     id: number;
@@ -39,12 +41,31 @@ class App extends Component<propsApps, statesApp>{
             }
         ],
         isEdit:false,
+        editData:{
+            id: 0,
+            title: "",
+            
+        }
+    }
+
+    setTitle = (e : React.ChangeEvent<HTMLInputElement>):void => {
+        this.setState({
+            editData:{
+                ...this.state.editData,
+                title: e.target.value
+            }
+        })
     }
     
-    openModal = () => {
+    openModal = (id:number, data?:string) => {
         this.setState({
-            isEdit:true
+            isEdit:true,
+            editData:{
+                id,
+                title:data
+            }
         })
+        
     }
     closeModal = () => {
         this.setState({
@@ -72,7 +93,6 @@ class App extends Component<propsApps, statesApp>{
     
     render(){
         const { todos, isEdit } = this.state
-        console.log(isEdit)
         return(
             <div className="app">
                 <div className="logo">
@@ -83,7 +103,7 @@ class App extends Component<propsApps, statesApp>{
                     
                 {
                     Object.keys(todos).map((index,i) => (
-                        <TodoItem  open={() => this.openModal()} key={todos[Number(i)].id} idData={todos[Number(i)].id} todos={todos[Number(index)].title} del={() => this.deleteTask(todos[Number(index)].id)}/>
+                        <TodoItem  open={() => this.openModal(todos[Number(i)].id,todos[Number(index)].title)} key={todos[Number(i)].id} idData={todos[Number(i)].id} todos={todos[Number(index)].title} del={() => this.deleteTask(todos[Number(index)].id)}/>
                     ))
                     
                 }
@@ -93,7 +113,7 @@ class App extends Component<propsApps, statesApp>{
                     <FormInput add={this.addTask}/>
                 </div>
                 
-                <EditModal edit={isEdit} close={() => this.closeModal()}/>
+                <EditModal edit={isEdit} close={() => this.closeModal()} change={this.setTitle} data={this.state.editData}/>
             </div>
             
         )

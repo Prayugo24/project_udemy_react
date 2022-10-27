@@ -7,7 +7,7 @@ interface TodosProps {
     idData?:number
     todos?:string
     del:(id?:number) => void
-    open:() => void
+    open:(id?:number,title?:string) => void
 }
 
 const TodoItem: React.FC<TodosProps> = ({idData, todos, del , open}) => {
@@ -18,7 +18,7 @@ const TodoItem: React.FC<TodosProps> = ({idData, todos, del , open}) => {
         <div className="todoItem">
             <p>{todos}</p>
             <div>
-                <Button text="Edit" variant="btn btn-success" action={open} />
+                <Button text="Edit" variant="btn btn-success" action={() => open(idData,todos)} />
                 <Button text="Delete" variant="btn btn-warning" action={() => deleteById(idData)}/>
             </div>
         </div>
