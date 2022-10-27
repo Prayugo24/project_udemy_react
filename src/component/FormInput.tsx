@@ -11,11 +11,9 @@ interface propsFormInput{
 }
 
 class FormInput extends Component<propsFormInput, stateFormInput>{
-    // stateForm: stateFormInput;
     propsForm: propsFormInput;
     constructor(props:propsFormInput, stetes:stateFormInput){
         super(props, stetes)
-        // this.stateForm = stetes
         this.propsForm = props 
     }
     state: stateFormInput={
