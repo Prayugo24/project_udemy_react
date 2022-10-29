@@ -5,12 +5,14 @@ import TodoItem from "./TodoItem";
 import '../assets/style/App.css';
 import '../assets/style/index.css';
 import EditModal from "./EditModal";
+import ModalConfirm from "./ModalConfirm"
 const logo: string = require("../assets/images/logo.svg").default;
 
 
 interface statesApp {
     todos:Data[],
     isEdit:Boolean
+    isEditConfitm:Boolean
     editData:Data
 }
 
@@ -41,12 +43,15 @@ class App extends Component<propsApps, statesApp>{
             }
         ],
         isEdit:false,
+        isEditConfitm:false,
         editData:{
             id: 0,
             title: "",
             
         }
     }
+
+
 
     update = () =>{
         const {id, title}= this.state.editData
@@ -56,6 +61,7 @@ class App extends Component<propsApps, statesApp>{
         this.setState({
             todos:newTodos,
             isEdit:false,
+            isEditConfitm:false,
             editData:{
                 id: 0,
                 title: "",
@@ -70,6 +76,21 @@ class App extends Component<propsApps, statesApp>{
                 ...this.state.editData,
                 title: e.target.value
             }
+        })
+    }
+
+    openModalConfirm = () =>{
+        console.log("open")
+        this.setState({
+            isEditConfitm:true,
+            isEdit:false,
+        })
+    }
+
+    closeModalConfirm = () =>{
+        this.setState({
+            isEditConfitm:false,
+            isEdit:false,
         })
     }
     
@@ -108,7 +129,7 @@ class App extends Component<propsApps, statesApp>{
     }
     
     render(){
-        const { todos, isEdit } = this.state
+        const { todos, isEdit, isEditConfitm } = this.state
         return(
             <div className="app">
                 <div className="logo">
@@ -131,11 +152,16 @@ class App extends Component<propsApps, statesApp>{
                 
                 <EditModal 
                     edit={isEdit} 
+                    openConfirm={() => this.openModalConfirm()}
                     close={() => this.closeModal()} 
                     change={this.setTitle} 
                     data={this.state.editData} 
-                    update={this.update} 
                 /> 
+                <ModalConfirm 
+                    editConfirm={isEditConfitm}
+                    update={this.update}
+                    close={() => this.closeModalConfirm()} 
+                />
             </div>
             
         )

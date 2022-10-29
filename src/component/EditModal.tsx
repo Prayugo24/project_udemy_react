@@ -9,7 +9,7 @@ interface stateEditModal {
 interface propsEditModal {
     edit:Boolean
     close: () => void
-    update: () => void
+    openConfirm:() => void
     change:(e: React.ChangeEvent<HTMLInputElement>) => void
     data:Data
 }
@@ -21,7 +21,7 @@ type Data = {
 class EditModal extends Component<propsEditModal, stateEditModal>{
     
     render(): React.ReactNode {
-        const { close , edit, data, change, update} = this.props
+        const { close , edit, data, change,  openConfirm} = this.props
         if(edit){
             return(
                 <div className="modal-container">
@@ -31,7 +31,7 @@ class EditModal extends Component<propsEditModal, stateEditModal>{
                             <input type="text" value={data.title} onChange={change}/>
                         </div>
                         <div className="btn-group">
-                            <Button text="oke" variant="btn btn-success" action={update}/>
+                            <Button text="oke" variant="btn btn-success" action={openConfirm}/>
                             <Button text="cancel" variant="btn btn-warning" action={close}/>
                         </div>
                     </div>
